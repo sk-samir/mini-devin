@@ -1,5 +1,5 @@
-import ollama
-from app.tools import run_tool
+from agents.sql_agent import ask_database
+from agents.tools import run_tool
 
 def choose_tool(user_input: str):
     prompt = f"""
@@ -15,6 +15,7 @@ User input: {user_input}
 Return ONLY one word: sql OR explain_code OR chat
 """
 
+    import ollama
     response = ollama.chat(
         model="llama3",
         messages=[{"role": "user", "content": prompt}]

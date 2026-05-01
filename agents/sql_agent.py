@@ -1,4 +1,4 @@
-from app.sql_db import get_connection
+from database.sql_db import get_connection
 import ollama
 
 def run_sql(query: str):

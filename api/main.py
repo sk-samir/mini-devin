@@ -1,15 +1,10 @@
 from fastapi import FastAPI
-from app.llm import ask_llm
-from app.llm import explain_code
-from memory import save_message, get_history, delete_history
-from app.sql_agent import ask_database
-from app.agent import run_agent
+from llm.llm import ask_llm, explain_code
+from storage.memory import save_message, get_history, delete_history
+from agents.sql_agent import ask_database
+from agents.agent import run_agent
 
 app = FastAPI()
-
-# @app.get("/")
-# def home():
-#     return {"message": "Mini Devin is running 🚀"}
 
 @app.get("/agent")
 def agent(query: str):

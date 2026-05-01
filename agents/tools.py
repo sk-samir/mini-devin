@@ -1,5 +1,5 @@
-from app.sql_agent import ask_database
-from app.llm import ask_llm, explain_code
+from agents.sql_agent import ask_database
+from llm.llm import ask_llm, explain_code
 
 def run_tool(tool_name: str, input_text: str):
     if tool_name == "sql":

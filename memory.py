@@ -23,6 +23,11 @@ def _serialize_document(doc):
     }
 
 
+def delete_history():
+    result = collection.delete_many({})
+    return result.deleted_count
+
+
 def get_history(limit=10):
     docs = collection.find().sort("_id", -1).limit(limit)
     return [_serialize_document(doc) for doc in docs]

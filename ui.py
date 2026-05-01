@@ -12,6 +12,17 @@ try:
 except Exception:
     st.error("Unable to load saved chat history from the backend.")
 
+if st.button("Clear saved chat history"):
+    try:
+        result = requests.delete("http://127.0.0.1:8000/history")
+        if result.status_code == 200:
+            st.success("Saved chat history cleared.")
+            history = []
+        else:
+            st.error("Failed to clear history.")
+    except Exception:
+        st.error("Unable to contact backend to clear history.")
+
 if history:
     st.subheader("Saved Chat History")
     for entry in history:

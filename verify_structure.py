@@ -73,7 +73,7 @@ def check_imports():
         ("llm.llm", "ask_llm"),
         ("database.sql_db", "get_connection"),
         ("storage.memory", "get_history"),
-        ("agents.agent", "run_agent"),
+        ("agents.agent", "agent_loop"),
         ("agents.sql_agent", "ask_database"),
         ("agents.tools", "run_tool"),
         ("api.main", "app"),

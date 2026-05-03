@@ -17,13 +17,13 @@ if __name__ == "__main__":
     logger.info("🚀 Starting Mini Devin Backend...")
 
     print("🚀 Starting Mini Devin Backend...")
-    print("Backend running at http://127.0.0.1:8000")
-    print("API documentation available at http://127.0.0.1:8000/docs")
+    print("Backend running at http://127.0.0.1:8001")
+    print("API documentation available at http://127.0.0.1:8001/docs")
     print("Logs available in logs/ directory")
     print("Press Ctrl+C to stop the server\n")
 
     try:
-        uvicorn.run(app, host="127.0.0.1", port=8000)
+        uvicorn.run(app, host="127.0.0.1", port=8001)
     except KeyboardInterrupt:
         logger.info("Backend server stopped by user")
         print("\n✅ Backend server stopped.")

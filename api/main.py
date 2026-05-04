@@ -5,6 +5,7 @@ from storage.memory import save_message, get_history, delete_history
 from agents.sql_agent import ask_database
 from agents.agent import agent_loop
 import logging_config
+from config import get_model_info
 import time
 import logging
 
@@ -70,6 +71,11 @@ async def log_requests(request: Request, call_next):
 @app.on_event("startup")
 async def startup_event():
     logger.info("🚀 Mini Devin API starting up")
+    
+    # Log model configuration
+    model_info = get_model_info()
+    logger.info(f"LLM Model: {model_info['name']} | Speed: {model_info['speed']} | Accuracy: {model_info['accuracy']}")
+    
     logger.info("Available endpoints:")
     for route in app.routes:
         if hasattr(route, 'path'):

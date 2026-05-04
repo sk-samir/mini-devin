@@ -1,6 +1,7 @@
 import ollama
 import logging
 import time
+from config import MODEL
 
 logger = logging.getLogger('llm')
 
@@ -13,7 +14,7 @@ def ask_llm(prompt: str) -> str:
 
     try:
         response = ollama.chat(
-            model="llama3",
+            model=MODEL,
             messages=[
                 {"role": "user", "content": prompt}
             ]
@@ -48,7 +49,7 @@ def explain_code(code: str) -> str:
         prompt = f"Explain this code clearly:\n{code}"
 
         response = ollama.chat(
-            model="llama3",
+            model=MODEL,
             messages=[{"role": "user", "content": prompt}]
         )
 

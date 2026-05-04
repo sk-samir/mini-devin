@@ -102,6 +102,9 @@ def ask_database(question: str):
         # Generate SQL from question
         sql = text_to_sql(question)
 
+        if not is_safe_query(sql):
+            return {"error": "Unsafe query blocked", "sql": sql}
+
         # Execute SQL
         result = run_sql(sql)
 
@@ -125,3 +128,23 @@ def ask_database(question: str):
                     extra={'extra_fields': {'total_time': f"{total_time:.2f}s"}},
                     exc_info=True)
         raise
+
+def is_safe_query(query: str):
+    """Check if SQL query is safe (read-only)."""
+    logger.info(f"Checking query safety: {query[:100]}...",
+                extra={'extra_fields': {'query_length': len(query)}})
+
+    forbidden = ["DELETE", "DROP", "UPDATE", "INSERT", "ALTER"]
+
+    for word in forbidden:
+        if word in query.upper():
+            logger.warning(f"Unsafe query detected: contains '{word}'",
+                         extra={'extra_fields': {
+                             'forbidden_word': word,
+                             'query': query[:200]
+                         }})
+            return False
+
+    logger.info("Query passed safety check",
+               extra={'extra_fields': {'query_length': len(query)}})
+    return True
